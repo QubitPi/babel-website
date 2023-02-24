@@ -5,7 +5,7 @@
     "swizzle": "docusaurus swizzle",
     "clear": "docusaurus clear",
     "build": "docusaurus build",
-    "deploy": "docusaurus publish",
+    "deploy": "docusaurus deploy",
     "write-translations": "docusaurus-write-translations",
     "serve": "docusaurus serve"
   },
