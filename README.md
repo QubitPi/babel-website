@@ -18,7 +18,7 @@ $ yarn && yarn bootstrap
 $ yarn build:docusaurus
 ```
 
-Then a GitHub Pages deployable will be generated under `website/build` directory
+Then a GitHub Pages deployable will be generated under `website/build/babel` directory
 
 ### Contributing to the website
 
