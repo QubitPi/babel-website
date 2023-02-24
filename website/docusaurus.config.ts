@@ -149,12 +149,12 @@ const siteConfig: Config = {
     },
   },
   titleDelimiter: "·",
-  baseUrl: "/",
+  baseUrl: "/babel-website",
   favicon: "img/favicon.png",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   customFields: {
-    repoUrl: "https://github.com/babel/babel",
+    repoUrl: "https://github.com/QubitPi/babel-website",
     v6Url: "https://v6.babeljs.io/docs/setup/",
     users,
     sponsors,
@@ -288,7 +288,9 @@ const siteConfig: Config = {
   },
   title: "Babel",
   tagline: "The compiler for next generation JavaScript",
-  url: "https://babeljs.io",
+  url: "https://paion-data.github.io/",
+  organizationName: "QubitPi",
+  projectName: "babel-website",
 
   scripts: [
     {
