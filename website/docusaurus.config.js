@@ -202,9 +202,6 @@ const siteConfig = {
   title: "Babel",
   tagline: "The compiler for next generation JavaScript",
   url: "https://paion-data.github.io/",
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
   organizationName: "QubitPi",
   projectName: "babel-website",
 
