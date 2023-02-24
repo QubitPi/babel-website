@@ -82,12 +82,12 @@ toolsMD.forEach(tool => {
 
 const siteConfig = {
   titleDelimiter: "·",
-  baseUrl: "/",
+  baseUrl: "/babel-website",
   favicon: "img/favicon.png",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   customFields: {
-    repoUrl: "https://github.com/babel/babel",
+    repoUrl: "https://github.com/QubitPi/babel-website",
     v6Url: "https://v6.babeljs.io/docs/setup/",
     users,
     sponsors,
@@ -201,7 +201,12 @@ const siteConfig = {
   },
   title: "Babel",
   tagline: "The compiler for next generation JavaScript",
-  url: "https://babeljs.io",
+  url: "https://paion-data.github.io/",
+
+  // GitHub pages deployment config.
+  // If you aren't using GitHub pages, you don't need these.
+  organizationName: "QubitPi",
+  projectName: "babel-website",
 
   scripts: [
     {
