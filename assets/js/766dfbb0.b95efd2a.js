@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk=self.webpackChunk||[]).push([["8687"],{61615:function(e){e.exports=JSON.parse('{"metadata":{"permalink":"/babel-website/blog/page/6","page":6,"postsPerPage":10,"totalPages":7,"totalCount":63,"previousPage":"/babel-website/blog/page/5","nextPage":"/babel-website/blog/page/7","blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

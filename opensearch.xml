@@ -4,8 +4,8 @@
   <ShortName>Babel</ShortName>
   <Description>Search Babel</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://paion-data.github.io/babel-website/img/favicon.png</Image>
-  <Url type="text/html" method="get" template="https://paion-data.github.io/babel-website/search?q={searchTerms}"/>
-  <Url type="application/opensearchdescription+xml" rel="self" template="https://paion-data.github.io/babel-website/opensearch.xml" />
-  <moz:SearchForm>https://paion-data.github.io/babel-website/</moz:SearchForm>
+  <Image width="16" height="16" type="image/x-icon">https://babel.qubitpi.org/img/favicon.png</Image>
+  <Url type="text/html" method="get" template="https://babel.qubitpi.org/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://babel.qubitpi.org/opensearch.xml" />
+  <moz:SearchForm>https://babel.qubitpi.org/</moz:SearchForm>
 </OpenSearchDescription>
