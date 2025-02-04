@@ -1,8 +1,1 @@
-(function() {
-  document.addEventListener("DOMContentLoaded", function() {
-    const pathname = window.document.location.pathname;
-    if (pathname.indexOf("/repl") != -1) {
-      document.body.setAttribute("data-repl", "");
-    }
-  });
-})();
+document.addEventListener("DOMContentLoaded",function(){-1!=window.document.location.pathname.indexOf("/repl")&&document.body.setAttribute("data-repl","")});
