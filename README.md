@@ -1,9 +1,9 @@
-# Fork of [babel/website](https://babeljs.io)
+# [babel/website](https://babeljs.io)
 
-This is the fork for the [babeljs.io](https://babeljs.io) website; feel free to suggest changes to our docs!
+This is the source for the [babeljs.io](https://babeljs.io) website; feel free to suggest changes to our docs!
 
-- Fork Current: `master` branch is deployed to https://qubitpi.github.io/babel-website/
-- Upstream Current: `main` branch is deployed to https://babeljs.io
+- Current: `main` branch is deployed to https://babeljs.io
+- Old: `old-site` branch is deployed to https://v6.babeljs.io
 
 ### Setup
 
@@ -14,10 +14,9 @@ Yarn: Make sure that Yarn 1 is installed with version >= 1.19.0.
 ```shell title="Shell"
 $ git clone git@github.com:babel/website.git
 $ yarn && yarn bootstrap
-$ yarn build:docusaurus
 ```
 
-Then a GitHub Pages deployable will be generated under `website/build/babel` directory
+- Just run `yarn start` next time (check the package.json for scripts).
 
 ### Contributing to the website
 
