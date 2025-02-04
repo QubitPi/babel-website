@@ -128,7 +128,7 @@ const siteConfig = {
     experimental_faster: true,
   },
   titleDelimiter: "·",
-  baseUrl: "/babel-website",
+  baseUrl: "/",
   favicon: "img/favicon.png",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
@@ -266,7 +266,7 @@ const siteConfig = {
   },
   title: "Babel",
   tagline: "The compiler for next generation JavaScript",
-  url: "https://paion-data.github.io/",
+  url: "https://babel.qubitpi.org/",
   organizationName: "QubitPi",
   projectName: "babel-website",
 
