@@ -1,1 +1,0 @@
-document.addEventListener("DOMContentLoaded",function(){-1!=window.document.location.pathname.indexOf("/repl")&&document.body.setAttribute("data-repl","")});

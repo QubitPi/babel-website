@@ -1,4 +1,33 @@
-var t,e,i,o,r;import{EditorState as d,basicSetup as s,EditorView as n,oneDark as a,javascriptLanguage as p}from"../build/cm6.mjs";let l=document.createElement("template");l.innerHTML=`
+/* globals Babel */
+
+import { basicSetup } from "https://esm.sh/codemirror@6.0.1";
+import { EditorState } from "https://esm.sh/@codemirror/state@^6.0.0";
+import { EditorView } from "https://esm.sh/@codemirror/view@^6.0.0";
+import { oneDark } from "https://esm.sh/@codemirror/theme-one-dark@^6.0.0";
+import { javascriptLanguage } from "https://esm.sh/@codemirror/lang-javascript@^6.0.0";
+
+function debounce(func, wait, immediate) {
+  var timeout;
+  var fn = function () {
+    var context = this,
+      args = arguments;
+    var later = function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+  fn.cancel = function () {
+    clearTimeout(timeout);
+  };
+  return fn;
+}
+
+const template = document.createElement("template");
+template.innerHTML = `
   <div>
     <div class="repl">
       <h3 class="input-title">Input code</h3>
@@ -126,4 +155,130 @@ var t,e,i,o,r;import{EditorState as d,basicSetup as s,EditorView as n,oneDark as
       }
     </style>
   </div>
-`;class u extends HTMLElement{_inEditor;_outEditor;_debouncedShowError=(t=this._showError.bind(this),e=1e3,(r=function(){var r=this,d=arguments,s=i&&!o;clearTimeout(o),o=setTimeout(function(){o=null,!i&&t.apply(r,d)},e),s&&t.apply(r,d)}).cancel=function(){clearTimeout(o)},r);constructor(){super(),this.attachShadow({mode:"open"}),this.shadowRoot.appendChild(l.content.cloneNode(!0))}connectedCallback(){this._defaultCode=this.getAttribute("default-code"),this._vertical=this.hasAttribute("vertical"),this._options=JSON.parse(this.getAttribute("options"))??{},this._vertical&&this.shadowRoot.querySelector(".repl").classList.add("vertical");let t=this.getAttribute("default-code")??"";this._inEditor=new n({state:this._createInputEditorState(t),parent:this.shadowRoot.querySelector("#repl-in"),root:this.shadowRoot,dispatch:t=>{this._inEditor.update([t]),this._render()}}),this._outEditor=new n({state:this._createOutputEditorState(""),parent:this.shadowRoot.querySelector("#repl-out"),root:this.shadowRoot}),this.shadowRoot.querySelector("#repl-in").addEventListener("click",()=>{this._inEditor.focus()})}setInput(t){this._inEditor.setState(this._createInputEditorState(t)),this._render()}get options(){return this._options}set options(t){this._options=t,this._render()}_render(){let t=this._inEditor.state.doc.toString();if(!t){this._outEditor.setState(this._createOutputEditorState("")),this._hideError();return}try{let e=this._compile(t);this._outEditor.setState(this._createOutputEditorState(e)),this._hideError()}catch(t){this._debouncedShowError(t.message)}}_compile(t){return Babel.transform(t,this._options).code}_createInputEditorState(t){return d.create({doc:t,extensions:[s,a,p]})}_createOutputEditorState(t){return d.create({doc:t,extensions:[s,a,p,n.editable.of(!1)]})}_showError(t){let e=this.shadowRoot.getElementById("error");e.textContent=t,e.classList.add("output-error--visible")}_hideError(){this._debouncedShowError.cancel(),this.shadowRoot.getElementById("error").classList.remove("output-error--visible")}}customElements.define("mini-repl",u);
+`;
+
+class MiniRepl extends HTMLElement {
+  _inEditor;
+  _outEditor;
+
+  _debouncedShowError = debounce(this._showError.bind(this), 1000);
+
+  constructor() {
+    super();
+
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+  connectedCallback() {
+    this._defaultCode = this.getAttribute("default-code");
+    this._vertical = this.hasAttribute("vertical");
+    this._options = JSON.parse(this.getAttribute("options")) ?? {};
+
+    if (this._vertical) {
+      this.shadowRoot.querySelector(".repl").classList.add("vertical");
+    }
+
+    const defaultCode = this.getAttribute("default-code") ?? "";
+
+    this._inEditor = new EditorView({
+      state: this._createInputEditorState(defaultCode),
+      parent: this.shadowRoot.querySelector("#repl-in"),
+      root: this.shadowRoot,
+      dispatch: (tr) => {
+        this._inEditor.update([tr]);
+        this._render();
+      },
+    });
+    this._outEditor = new EditorView({
+      state: this._createOutputEditorState(""),
+      parent: this.shadowRoot.querySelector("#repl-out"),
+      root: this.shadowRoot,
+    });
+
+    this.shadowRoot.querySelector("#repl-in").addEventListener("click", () => {
+      this._inEditor.focus();
+    });
+  }
+
+  setInput(code) {
+    this._inEditor.setState(this._createInputEditorState(code));
+    this._render();
+  }
+
+  get options() {
+    return this._options;
+  }
+  set options(options) {
+    this._options = options;
+    this._render();
+  }
+
+  _render() {
+    const inputCode = this._inEditor.state.doc.toString();
+
+    if (!inputCode) {
+      this._outEditor.setState(this._createOutputEditorState(""));
+      this._hideError();
+      return;
+    }
+
+    try {
+      const compiled = this._compile(inputCode);
+      this._outEditor.setState(this._createOutputEditorState(compiled));
+      this._hideError();
+    } catch (err) {
+      this._debouncedShowError(err.message);
+    }
+  }
+
+  _compile(code) {
+    return Babel.transform(code, this._options).code;
+  }
+
+  _createInputEditorState(content) {
+    return EditorState.create({
+      doc: content,
+      extensions: [
+        basicSetup,
+        oneDark,
+        javascriptLanguage,
+        //EditorView.lineWrapping,
+      ],
+    });
+  }
+
+  _createOutputEditorState(content) {
+    return EditorState.create({
+      doc: content,
+      extensions: [
+        basicSetup,
+        oneDark,
+        javascriptLanguage,
+        //EditorView.lineWrapping,
+        EditorView.editable.of(false),
+      ],
+    });
+  }
+
+  _showError(babelError) {
+    const err = this.shadowRoot.getElementById("error");
+    err.textContent = babelError;
+    err.classList.add("output-error--visible");
+  }
+
+  _hideError() {
+    this._debouncedShowError.cancel();
+    this.shadowRoot
+      .getElementById("error")
+      .classList.remove("output-error--visible");
+  }
+}
+
+customElements.define("mini-repl", MiniRepl);
+
+/*
+<h2>noDocumentAll</h2>
+
+<div class="repl" data-original-input="foo?.bar"></div>
+*/
