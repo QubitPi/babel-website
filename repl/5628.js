@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbabel_github_io=self.webpackChunkbabel_github_io||[]).push([[5628],{45628:function(b,e,u){u.r(e)}}]);
